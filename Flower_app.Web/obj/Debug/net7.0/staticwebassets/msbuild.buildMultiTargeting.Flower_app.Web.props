@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Flower_app.Web.props" />
+</Project>
