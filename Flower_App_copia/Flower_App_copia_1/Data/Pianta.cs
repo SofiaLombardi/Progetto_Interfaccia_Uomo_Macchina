@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Flower_App_copia_1.Data
 {
-    public class Piante
+    public class Pianta
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -22,12 +22,38 @@ namespace Flower_App_copia_1.Data
 
         [Required]
         [DisplayName("Descrizione")]
-        public string Descrizione { get; set; }
+        public string DescrizionePianta { get; set; }
 
         [Required]
-        public byte[] FotoPianta { get; set; } // Sofi: Possiamo usare byte oppure anche Blob(non l'ho mai usato ma mi hanno detto che in genere si usa per le foto)
+        public byte[] FotoPianta { get; set; }
 
         [Required]
+        [DisplayName("Colorazioni fiore")]
+        public ColoreFiore Colore { get; set; }
+
+        public enum ColoreFiore
+        {
+            Bianco,
+            Rosso,
+            Giallo,
+            Arancione,
+            Rosa,
+            Blu,
+            Viola,
+            Lilla,
+            Verde,
+            Marrone,
+            Nero,
+            Misto,
+            Crema,
+            Lavanda,
+            Indaco,
+            Corallo,
+            Fucsia
+        }
+
+        [Required]
+        [DisplayName("Esposizione solare")]
         public EsposizioneSolare Esposizione { get; set; }
 
         public enum EsposizioneSolare { Ombra, Sole, Penombra }
@@ -43,11 +69,13 @@ namespace Flower_App_copia_1.Data
         public enum TipologiaTerreno { ArgillosoPesante, Sabbioso, Limoso }
 
         [Required]
+        [DisplayName("Pesantezza del terreno")]
         public PesantezzaTerreno PesantezzaDelTerreno { get; set; }
 
         public enum PesantezzaTerreno { Soffice, Medio, Pesante }
 
         [Required]
+        [DisplayName("acidità del Terreno")]
         public PhTerreno AciditàTerreno { get; set; }
 
         public enum PhTerreno { Acido, Alcalino, Neutro }
@@ -57,8 +85,12 @@ namespace Flower_App_copia_1.Data
         public string DescrizioneTerreno { get; set; }
 
         [Required]
-        [DisplayName("Fioritura")]
-        public DateTime Fioritura { get; set; }
+        [DisplayName("Fioritura Massima")]
+        public DateTime FiorituraMassima { get; set; }
+        
+        [Required]
+        [DisplayName("Fioritura Minima")]
+        public DateTime FiorituraMinima { get; set; }
 
         [Required]
         [DisplayName("Descrizione Fioritura")]
@@ -75,6 +107,7 @@ namespace Flower_App_copia_1.Data
         public string DescrizioneIrrigazione { get; set; }
 
         [Required]
+        [DisplayName("Periodo concimazione")]
         public Concimazione Concime { get; set; }
 
         public enum Concimazione { Inverno, Autunno, Primavera, Estate }
@@ -95,8 +128,11 @@ namespace Flower_App_copia_1.Data
 
 
         [Required]
-        [DisplayName("Ambiente")]
-        public bool Ambiente { get; set; }
+        [DisplayName("Tipo Ambiente")]
+        public TipoAmbiente Ambiente { get; set; }
+
+        // Enum per Ambiente
+        public enum TipoAmbiente { Interno, Esterno }
 
 
         [Required]
@@ -106,19 +142,17 @@ namespace Flower_App_copia_1.Data
         [Required]
         [DisplayName("Idee casa Id")]
         public string IdeeCasaId { get; set; }
-        public IdeeCasa IdeeCasa { get; set; }
+        public IdeaCasa IdeeCasa { get; set; }
 
+       
         [Required]
         [DisplayName("Consigli  Id")]
         public string ConsigliId { get; set; }
         public Consigli Consigli { get; set; }
 
 
-        // Foreign Key for IdentityUser
-        [Required]
-        [DisplayName("User ID")]
-        public string UserId { get; set; }
-        public IdentityUser User { get; set; }
-
+        // Relazione molti-a-molti con Cliente
+        public ICollection<ClientePianta> ClientePiante { get; set; }
     }
+
 }

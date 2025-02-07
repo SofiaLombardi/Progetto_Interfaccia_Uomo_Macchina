@@ -1,0 +1,63 @@
+﻿@using Flower_App_copia_1.Data
+@model PaginatedList<Flower_App_copia_1.Data.IdeaCasa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Idee Casa</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+
+<form asp-action="Index" method="get" class="form-inline">
+    <input type="text" class="form-control form-control-sm mb-2 mr-sm-2 text" id="TitoloIdea" name="TitoloIdea" value="@ViewData["FilterTitoloIdea"]" placeholder="Titolo Idea">
+    <input type="text" class="form-control form-control-sm mb-2 mr-sm-2 text" id="Descrizione" name="Descrizione" value="@ViewData["FilterDescrizione"]" placeholder="Descrizione">
+    <button type="submit" class="btn btn-primary mb-2 mr-2">Search</button>
+    <a asp-action="Index" class="btn btn-secondary mb-2">Reset</a>
+</form>
+
+<table class="table table-striped">
+    <caption>Ideas Casa list</caption>
+    <thead>
+        <tr>
+            <th class="text">@Html.DisplayNameFor(model => model[0].TitoloIdea)</th>
+            <th class="text">@Html.DisplayNameFor(model => model[0].Descrizione)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TitoloIdea)</td>
+                <td>@Html.DisplayFor(modelItem => item.Descrizione)</td>
+                <td class="d-flex flex-nowrap">
+                    <a asp-action="Delete" asp-route-id="@item.IdeeCasaId" class="btn btn-danger mr-sm-2 float-right">Delete</a>
+                    <a asp-action="Details" asp-route-id="@item.IdeeCasaId" class="btn btn-info mr-sm-2 float-right">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.IdeeCasaId" class="btn btn-primary mr-sm-2 float-right">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<!-- Paginazione -->
+<div class="d-flex justify-content-between">
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageNumber - 1)"
+       asp-route-TitoloIdea="@ViewData["FilterTitoloIdea"]"
+       asp-route-Descrizione="@ViewData["FilterDescrizione"]"
+       class="btn btn-primary @prevDisabled">Previous</a>
+
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageNumber + 1)"
+       asp-route-TitoloIdea="@ViewData["FilterTitoloIdea"]"
+       asp-route-Descrizione="@ViewData["FilterDescrizione"]"
+       class="btn btn-primary @nextDisabled">Next</a>
+</div>

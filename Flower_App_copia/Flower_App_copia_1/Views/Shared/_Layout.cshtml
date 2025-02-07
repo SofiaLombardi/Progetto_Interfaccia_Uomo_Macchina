@@ -6,6 +6,8 @@
     <title>@ViewData["Title"] - Flower_App_copia_1</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/lib/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="~/Flower_App_copia_1.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -23,7 +25,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Piante" asp-action="Index">Piante</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Consigli" asp-action="Index">Consigli</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="IdeeCasa" asp-action="Index">Idee Casa</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -44,7 +52,9 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/select2/js/select2.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/search-modal.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

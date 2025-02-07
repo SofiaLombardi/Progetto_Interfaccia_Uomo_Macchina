@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Flower_App_copia_1.Data
 {
-    public class IdeeCasa
+    public class IdeaCasa
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,5 +18,7 @@ namespace Flower_App_copia_1.Data
         [Required]
         [DisplayName("Descrizione")]
         public string Descrizione { get; set; }
+
+      
     }
 }

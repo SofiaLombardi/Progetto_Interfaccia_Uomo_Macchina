@@ -1,0 +1,161 @@
+@using static Flower_App_copia_1.Data.Pianta
+@model Flower_App_copia_1.Data.Pianta
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<h4>Pianta</h4>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdPianta">
+
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control">
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomeScientifico" class="control-label"></label>
+                <input asp-for="NomeScientifico" class="form-control">
+                <span asp-validation-for="NomeScientifico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizionePianta" class="control-label"></label>
+                <input asp-for="DescrizionePianta" class="form-control">
+                <span asp-validation-for="DescrizionePianta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Esposizione" class="control-label"></label>
+                <span asp-validation-for="Esposizione" class="text-danger"></span>
+                <select asp-for="Esposizione" class="form-control" asp-items="Html.GetEnumSelectList<EsposizioneSolare>()"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizioneEsposizione" class="control-label"></label>
+                <input asp-for="DescrizioneEsposizione" class="form-control">
+                <span asp-validation-for="DescrizioneEsposizione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Terreno" class="control-label"></label>
+                <select asp-for="Terreno" class="form-control" asp-items="Html.GetEnumSelectList<TipologiaTerreno>()">
+                    <option value="">Seleziona Terreno</option>
+                </select>
+                <span asp-validation-for="Terreno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PesantezzaDelTerreno" class="control-label"></label>
+                <select asp-for="PesantezzaDelTerreno" class="form-control" asp-items="Html.GetEnumSelectList<PesantezzaTerreno>()">
+                    <option value="">Seleziona Pesantezza</option>
+                </select>
+                <span asp-validation-for="PesantezzaDelTerreno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AciditàTerreno" class="control-label"></label>
+                <select asp-for="AciditàTerreno" class="form-control" asp-items="Html.GetEnumSelectList<PhTerreno>()">
+                    <option value="">Seleziona Acidità</option>
+                </select>
+                <span asp-validation-for="AciditàTerreno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizioneTerreno" class="control-label"></label>
+                <input asp-for="DescrizioneTerreno" class="form-control">
+                <span asp-validation-for="DescrizioneTerreno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FiorituraMinima" class="control-label"></label>
+                <input asp-for="FiorituraMinima" class="form-control" type="date">
+                <span asp-validation-for="FiorituraMinima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FiorituraMassima" class="control-label"></label>
+                <input asp-for="FiorituraMassima" class="form-control" type="date">
+                <span asp-validation-for="FiorituraMassima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizioneFioritura" class="control-label"></label>
+                <input asp-for="DescrizioneFioritura" class="form-control">
+                <span asp-validation-for="DescrizioneFioritura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Irrigazione" class="control-label"></label>
+                <select asp-for="Irrigazione" class="form-control" asp-items="Html.GetEnumSelectList<Annaffiatura>()">
+                    <option value="">Seleziona Irrigazione</option>
+                </select>
+                <span asp-validation-for="Irrigazione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizioneIrrigazione" class="control-label"></label>
+                <input asp-for="DescrizioneIrrigazione" class="form-control">
+                <span asp-validation-for="DescrizioneIrrigazione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Concime" class="control-label"></label>
+                <select asp-for="Concime" class="form-control" asp-items="Html.GetEnumSelectList<Concimazione>()">
+                    <option value="">Seleziona Concime</option>
+                </select>
+                <span asp-validation-for="Concime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizioneConcimazione" class="control-label"></label>
+                <input asp-for="DescrizioneConcimazione" class="form-control">
+                <span asp-validation-for="DescrizioneConcimazione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Potatura" class="control-label"></label>
+                <input asp-for="Potatura" class="form-control" type="date">
+                <span asp-validation-for="Potatura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizionePotatura" class="control-label"></label>
+                <input asp-for="DescrizionePotatura" class="form-control">
+                <span asp-validation-for="DescrizionePotatura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ambiente" class="control-label"></label>
+                <select asp-for="Ambiente" class="form-control" asp-items="Html.GetEnumSelectList<TipoAmbiente>()">
+                    <option value="">Seleziona Ambiente</option>
+                </select>
+                <span asp-validation-for="Ambiente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizioneAmbiente" class="control-label"></label>
+                <input asp-for="DescrizioneAmbiente" class="form-control">
+                <span asp-validation-for="DescrizioneAmbiente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdeeCasaId" class="control-label"></label>
+                <input asp-for="IdeeCasaId" class="form-control">
+                <span asp-validation-for="IdeeCasaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsigliId" class="control-label"></label>
+                <input asp-for="ConsigliId" class="form-control">
+                <span asp-validation-for="ConsigliId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colore" class="control-label"></label>
+                <select asp-for="Colore" class="form-control" asp-items="Html.GetEnumSelectList<ColoreFiore>()">
+                    <option value="">Seleziona Colore</option>
+                </select>
+                <span asp-validation-for="Colore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

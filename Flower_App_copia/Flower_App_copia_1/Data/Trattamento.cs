@@ -39,7 +39,7 @@ namespace Flower_App_copia_1.Data
         [Required]
         [DisplayName("Id Pianta")]
         public string IdPianta { get; set; }
-        public Piante Pianta { get; set; }
+        public Pianta Pianta { get; set; }
 
 
         [DisplayName("Id Pianta")]

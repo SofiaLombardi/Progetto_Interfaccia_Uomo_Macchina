@@ -44,6 +44,61 @@ namespace Flower_App_copia_1.Data.Migrations
                     b.ToTable("Allerte");
                 });
 
+            modelBuilder.Entity("Flower_App_copia_1.Data.Cliente", b =>
+                {
+                    b.Property<string>("ClienteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Cognome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DataNascita")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ClienteId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Clienti");
+                });
+
+            modelBuilder.Entity("Flower_App_copia_1.Data.ClientePianta", b =>
+                {
+                    b.Property<string>("ClienteId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PiantaId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClientePiantaId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ClienteId", "PiantaId");
+
+                    b.HasIndex("PiantaId");
+
+                    b.ToTable("ClientePianta");
+                });
+
             modelBuilder.Entity("Flower_App_copia_1.Data.Consigli", b =>
                 {
                     b.Property<string>("ConsiglioId")
@@ -82,7 +137,7 @@ namespace Flower_App_copia_1.Data.Migrations
                     b.ToTable("IdeeCasa");
                 });
 
-            modelBuilder.Entity("Flower_App_copia_1.Data.Piante", b =>
+            modelBuilder.Entity("Flower_App_copia_1.Data.Pianta", b =>
                 {
                     b.Property<string>("IdPianta")
                         .ValueGeneratedOnAdd()
@@ -91,8 +146,11 @@ namespace Flower_App_copia_1.Data.Migrations
                     b.Property<int>("AciditàTerreno")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Ambiente")
-                        .HasColumnType("bit");
+                    b.Property<int>("Ambiente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Colore")
+                        .HasColumnType("int");
 
                     b.Property<int>("Concime")
                         .HasColumnType("int");
@@ -100,10 +158,6 @@ namespace Flower_App_copia_1.Data.Migrations
                     b.Property<string>("ConsigliId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Descrizione")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DescrizioneAmbiente")
                         .IsRequired()
@@ -125,6 +179,10 @@ namespace Flower_App_copia_1.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("DescrizionePianta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DescrizionePotatura")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -136,7 +194,10 @@ namespace Flower_App_copia_1.Data.Migrations
                     b.Property<int>("Esposizione")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Fioritura")
+                    b.Property<DateTime>("FiorituraMassima")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FiorituraMinima")
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("FotoPianta")
@@ -167,17 +228,11 @@ namespace Flower_App_copia_1.Data.Migrations
                     b.Property<int>("Terreno")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("IdPianta");
 
                     b.HasIndex("ConsigliId");
 
                     b.HasIndex("IdeeCasaId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Piante");
                 });
@@ -448,7 +503,37 @@ namespace Flower_App_copia_1.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Flower_App_copia_1.Data.Piante", b =>
+            modelBuilder.Entity("Flower_App_copia_1.Data.Cliente", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Flower_App_copia_1.Data.ClientePianta", b =>
+                {
+                    b.HasOne("Flower_App_copia_1.Data.Cliente", "Cliente")
+                        .WithMany("ClientePiante")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Flower_App_copia_1.Data.Pianta", "Pianta")
+                        .WithMany("ClientePiante")
+                        .HasForeignKey("PiantaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Pianta");
+                });
+
+            modelBuilder.Entity("Flower_App_copia_1.Data.Pianta", b =>
                 {
                     b.HasOne("Flower_App_copia_1.Data.Consigli", "Consigli")
                         .WithMany()
@@ -462,17 +547,9 @@ namespace Flower_App_copia_1.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Consigli");
 
                     b.Navigation("IdeeCasa");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Flower_App_copia_1.Data.Trattamenti", b =>
@@ -483,7 +560,7 @@ namespace Flower_App_copia_1.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Flower_App_copia_1.Data.Piante", "Pianta")
+                    b.HasOne("Flower_App_copia_1.Data.Pianta", "Pianta")
                         .WithMany()
                         .HasForeignKey("PiantaIdPianta");
 
@@ -541,6 +618,16 @@ namespace Flower_App_copia_1.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Flower_App_copia_1.Data.Cliente", b =>
+                {
+                    b.Navigation("ClientePiante");
+                });
+
+            modelBuilder.Entity("Flower_App_copia_1.Data.Pianta", b =>
+                {
+                    b.Navigation("ClientePiante");
                 });
 #pragma warning restore 612, 618
         }
