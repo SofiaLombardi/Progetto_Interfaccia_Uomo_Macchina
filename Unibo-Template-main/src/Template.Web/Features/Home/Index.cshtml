@@ -1,0 +1,174 @@
+﻿@page
+
+@* @using Template.Infrastructure; *@
+
+@model Template.Web.Features.Home.IndexModel
+@{
+    ViewData["Title"] = "FlowerApp - la nostra app per la floricoltura";
+    ViewData["Description"] = "Scopri nuove piante, imposta un calendario personalizzato e fatti consigliare dalle nostre proposte";
+    // ViewData["OgImage"] = "image/path/.png";
+    // ViewData["ShowSkin"] = true; //check what this is
+}
+
+@* @style/CSS/SASS missing (including everything about white spaces - margins, paddings, etc.) *@
+@* also, breakpoints barely used: TO BE ADDED *@
+
+@* NAVBAR - top of the page *@
+<nav class="navbar navbar-expand-lg shadow p-3 mb-5 bg-body-tertiary rounded-bottom">
+    <div class="nav-item dropdown-menu-lg-start">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Menu
+        </a>
+        <ul class="dropdown-menu"> @* TODO: aggiungere link effettivi *@
+            <li>
+                <i class="dropdown-item float-end fa-solid fa-house"/>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#">Elenco piante</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="#">Curiosità</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="#">Calendario trattamenti</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="#">Idee di arredamento</a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="#">FAQ</a>
+            </li>
+        </ul>
+    </div>
+   
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <form role="search">
+                <input type="search" class="form-control me-2" placeholder="Cerca" aria-label="Cerca">
+                <i class="btn fa-solid fa-magnifying-glass" type="submit" aria-label="Cerca"/>
+            </form>
+        </li>
+        <li><div class="vr"/></li> @* vertical divider *@
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Accedi</a> @* TODO: aggiungere link alla pagina di login *@
+        </li>
+    </ul>
+</nav>
+
+@* PAGE TITLE *@
+<h1>Flower App</h1> @* usare @Model.Title ? *@
+
+@* 1st SECTION - Piante più vendute *@
+<h2>
+    <a class="link-underline-opacity-0" href="#">Piante più vendute</a> @*TODO: aggiungi link effettivo*@
+</h2>
+@* <button class="btn">
+    <h2>Piante più vendute</h2>
+    <i class="fa-solid fa-chevron-right"></i>
+</button> *@
+<div id="mostSelledPlantsCarousel">
+    <div class="carousel-indicators">
+        @foreach (var plant in Model.MostSelledPlants)
+        {
+            <button type="button" data-bs-target="#mostSelledPlantsCarousel" data-bs-slide-to="@plant.Position" aria-current="true" aria-label="Slide numero @plant.Position"></button>
+        }
+    </div>
+    <div class="carousel-inner">
+        @foreach (var plant in Model.MostSelledPlants)
+        {
+            <div class="carousel-item active">
+                <img src="@plant.ImagePath" class="d-inline-block w-25" alt="immagine di @plant.Name" /> @*add breakpoints*@
+                <div class="carousel-caption d-none d-inline-block">
+                    <h3>@plant.Name</h3>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@* 2nd SECTION - Idee per arredare la tua casa *@
+<h2>
+    <a class="link-underline-opacity-0" href="#">Idee per arredare la tua casa</a> @*TODO: aggiungi link effettivo*@
+</h2>
+<div id="houseFurnishingIdeasCarousel">
+    <div class="carousel-indicators">
+        @foreach (var idea in Model.HouseFurnishingIdeas)
+        {
+            <button type="button" data-bs-target="#houseFurnishingIdeasCarousel" data-bs-slide-to="@idea.Position" aria-current="true" aria-label="Slide @idea.Position"></button>
+        }
+    </div>
+    <div class="carousel-inner">
+        @foreach (var idea in Model.HouseFurnishingIdeas)
+        {
+            <div class="carousel-item active">
+                <img src="@idea.ImagePath" class="d-inline-block w-50" alt="" /> @*add breakpoints + alt*@
+                <div class="carousel-caption d-none d-inline-block">
+                    <h3>@idea.Title</h3>
+                    <h4>@idea.Room</h4>
+                    <p class="text-wrap">@idea.ShortDescription</p> @*find a way to truncate the text in excess*@
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@* 3rd SECTION - Trattamenti del momento *@
+<h2>
+    <a class="link-underline-opacity-0" href="#">Trattamenti del momento</a> @*TODO: aggiungi link effettivo*@
+</h2>
+<div id="treatmentsCarousel">
+    <div class="carousel-indicators">
+        @foreach (var treatment in Model.Treatments)
+        {
+            <button type="button" data-bs-target="#treatmentsCarousel" data-bs-slide-to="@treatment.Position" aria-current="true" aria-label="Slide @treatment.Position"></button>
+        }
+    </div>
+    <div class="carousel-inner">
+        @foreach (var treatment in Model.Treatments)
+        {
+            <div class="carousel-item active">
+                <img src="@treatment.ImagePath" class="d-inline-block w-25" alt="" /> @*add breakpoints + alt*@
+                <div class="carousel-caption d-none d-inline-block">
+                    <h3>@treatment.Title</h3>
+                    <p>Effettuabile da @treatment.StartDate a @treatment.EndDate - durata: @treatment.Duration</p>
+                    <p class="text-wrap">@treatment.ShortDescription</p> @*find a way to truncate the text in excess*@
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@* 4th SECTION - Curiosità *@
+<h2>
+    <a class="link-underline-opacity-0" href="#">Curiosità</a> @*TODO: aggiungi link effettivo*@
+</h2>
+<div id="funFactsCarousel">
+    <div class="carousel-indicators">
+        @foreach (var item in Model.FunFacts)
+        {
+            <button type="button" data-bs-target="#funFactsCarousel" data-bs-slide-to="@item.Position" aria-current="true" aria-label="Slide @item.Position"></button>
+        }
+    </div>
+    <div class="carousel-inner">
+        @foreach (var item in Model.FunFacts)
+        {
+            <div class="carousel-item active">
+                <img src="@item.ImagePath" class="d-inline-block w-50" alt="" /> @*add breakpoints + alt*@
+                <div class="carousel-caption d-none d-inline-block">
+                    <h3>@item.Title</h3>
+                    <p class="text-wrap">@item.ShortDescription</p> @*find a way to truncate the text in excess*@
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@* FOOTER => spostare nelle Shared *@
+<div class="d-block align-content-center">
+    <p></p>
+</div>

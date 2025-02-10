@@ -1,14 +1,25 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
+using System.Threading.Tasks;
 
 namespace Template.Web.Features.Home
 {
     public partial class HomeController : Controller
     {
-        public HomeController()
+        private readonly AppSettings _appSettings;
+
+        public HomeController(IOptions<AppSettings> appSettings)
         {
+            _appSettings = appSettings.Value;
+        }
+
+        [HttpGet]
+        public virtual async Task<IActionResult> Index()
+        {
+            return View();
         }
 
         [HttpPost]
