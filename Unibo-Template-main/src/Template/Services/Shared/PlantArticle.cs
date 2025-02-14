@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore;
 
 namespace Template.Services.Shared
 {
@@ -18,11 +19,13 @@ namespace Template.Services.Shared
 
         public Plant Plant { get; set; } //see dbContext -> is it really necessary?
 
-        public PlantArticleSections Content { get; set; }
+        public PlantArticleSections Content { get; set; } = new PlantArticleSections();
 
-        public PlantCard Card { get; set; }
+
+        public PlantCard Card { get; set; }= new PlantCard();
     }
 
+    [Owned]
     public class PlantArticleSections
     {
         public string Description { get; set; }
@@ -46,9 +49,10 @@ namespace Template.Services.Shared
         public string Manuring { get; set; }
     }
 
+    [Owned]
     public class PlantCard
     {
-        public ToxicityLevelDescription Toxicity { get; set; }
+        public ToxicityLevelDescription Toxicity { get; set; } = new ToxicityLevelDescription();
 
         public LightExposureLevels LightExposure { get; set; }
 
@@ -58,7 +62,7 @@ namespace Template.Services.Shared
 
         public MonthsPeriod FloweringTime { get; set; }
 
-        public IEnumerable<string> FloweringColours { get; set; } //could become an enum or smth else maybe
+        public List<string> FloweringColours { get; set; } = new List<string>(); //could become an enum or smth else maybe
 
         public TerrainOptions Terrain { get; set; }
 

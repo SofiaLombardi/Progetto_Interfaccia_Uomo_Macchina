@@ -1,4 +1,5 @@
 ﻿@page
+@using Template.Services.Shared
 
 @* @using Template.Infrastructure; *@
 
@@ -19,9 +20,10 @@
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Menu
         </a>
-        <ul class="dropdown-menu"> @* TODO: aggiungere link effettivi *@
+        <ul class="dropdown-menu">
+            @* TODO: aggiungere link effettivi *@
             <li>
-                <i class="dropdown-item float-end fa-solid fa-house"/>
+                <i class="dropdown-item float-end fa-solid fa-house"></i>
             </li>
             <li>
                 <a class="dropdown-item" href="#">Elenco piante</a>
@@ -44,15 +46,18 @@
             </li>
         </ul>
     </div>
-   
+
     <ul class="nav justify-content-end">
         <li class="nav-item">
             <form role="search">
                 <input type="search" class="form-control me-2" placeholder="Cerca" aria-label="Cerca">
-                <i class="btn fa-solid fa-magnifying-glass" type="submit" aria-label="Cerca"/>
+                <button class="btn btn-outline-primary" type="submit" aria-label="Cerca">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
             </form>
         </li>
-        <li><div class="vr"/></li> @* vertical divider *@
+        <li><div class="vr" /></li> @* vertical divider *@
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Accedi</a> @* TODO: aggiungere link alla pagina di login *@
         </li>
@@ -81,7 +86,7 @@
         @foreach (var plant in Model.MostSelledPlants)
         {
             <div class="carousel-item active">
-                <img src="@plant.ImagePath" class="d-inline-block w-25" alt="immagine di @plant.Name" /> @*add breakpoints*@
+                <img src="@plant.ImagePath" class="img-fluid w-25" alt="immagine di @plant.Name" /> @*add breakpoints*@
                 <div class="carousel-caption d-none d-inline-block">
                     <h3>@plant.Name</h3>
                 </div>
@@ -97,7 +102,7 @@
 </h2>
 <div id="houseFurnishingIdeasCarousel">
     <div class="carousel-indicators">
-        @foreach (var idea in Model.HouseFurnishingIdeas)
+        @foreach (var idea in Model.Ho)
         {
             <button type="button" data-bs-target="#houseFurnishingIdeasCarousel" data-bs-slide-to="@idea.Position" aria-current="true" aria-label="Slide @idea.Position"></button>
         }
@@ -110,7 +115,9 @@
                 <div class="carousel-caption d-none d-inline-block">
                     <h3>@idea.Title</h3>
                     <h4>@idea.Room</h4>
-                    <p class="text-wrap">@idea.ShortDescription</p> @*find a way to truncate the text in excess*@
+                    <p class="text-truncate">@
+                        Treatment.ShortDescription
+                    </p>@*find a way to truncate the text in excess*@
                 </div>
             </div>
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
@@ -18,6 +19,9 @@ namespace Template.Services.Shared
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NickName { get; set; }
+
+        // Relazione con UserPlant
+        public List<UserPlant> UserPlants { get; set; } = new List<UserPlant>();
 
         /// <summary>
         /// Checks if password passed as parameter matches with the Password of the current user
