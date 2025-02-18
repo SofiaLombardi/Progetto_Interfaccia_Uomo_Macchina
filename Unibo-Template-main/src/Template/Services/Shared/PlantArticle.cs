@@ -71,6 +71,7 @@ namespace Template.Services.Shared
         public MonthsPeriod ManuringTime { get; set; }
     }
 
+    [Owned] //check
     public class ToxicityLevelDescription
     {
         public bool IsPoisonous { get; set; }
@@ -84,6 +85,7 @@ namespace Template.Services.Shared
         public string ShortDescription { get; set; }
     }
 
+    [Owned] 
     public class MonthsPeriod
     {
         public Months Start { get; set; }

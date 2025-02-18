@@ -102,9 +102,9 @@
 </h2>
 <div id="houseFurnishingIdeasCarousel">
     <div class="carousel-indicators">
-        @foreach (var idea in Model.Ho)
+        @foreach (var idea in Model.HouseFurnishingIdeas)
         {
-            <button type="button" data-bs-target="#houseFurnishingIdeasCarousel" data-bs-slide-to="@idea.Position" aria-current="true" aria-label="Slide @idea.Position"></button>
+            @* <button type="button" data-bs-target="#houseFurnishingIdeasCarousel" data-bs-slide-to="@idea.Position" aria-current="true" aria-label="Slide @idea.Position"></button> *@
         }
     </div>
     <div class="carousel-inner">
@@ -115,7 +115,7 @@
                 <div class="carousel-caption d-none d-inline-block">
                     <h3>@idea.Title</h3>
                     <h4>@idea.Room</h4>
-                    <p class="text-truncate">@
+                    <p class="text-truncate">
                         Treatment.ShortDescription
                     </p>@*find a way to truncate the text in excess*@
                 </div>
@@ -132,7 +132,7 @@
     <div class="carousel-indicators">
         @foreach (var treatment in Model.Treatments)
         {
-            <button type="button" data-bs-target="#treatmentsCarousel" data-bs-slide-to="@treatment.Position" aria-current="true" aria-label="Slide @treatment.Position"></button>
+            @* <button type="button" data-bs-target="#treatmentsCarousel" data-bs-slide-to="@treatment.Position" aria-current="true" aria-label="Slide @treatment.Position"></button> *@
         }
     </div>
     <div class="carousel-inner">
@@ -158,7 +158,7 @@
     <div class="carousel-indicators">
         @foreach (var item in Model.FunFacts)
         {
-            <button type="button" data-bs-target="#funFactsCarousel" data-bs-slide-to="@item.Position" aria-current="true" aria-label="Slide @item.Position"></button>
+            @* <button type="button" data-bs-target="#funFactsCarousel" data-bs-slide-to="@item.Position" aria-current="true" aria-label="Slide @item.Position"></button> *@
         }
     </div>
     <div class="carousel-inner">
