@@ -14,7 +14,6 @@ namespace Template.Services.Shared
 
         [Required]
         public Guid PlantId { get; set; } // Foreign Key riferita a Pianta
-        public Plant Plant { get; set; } // Relazione con Pianta
 
         public TreatmentDetails Details { get; set; } = new TreatmentDetails();
 

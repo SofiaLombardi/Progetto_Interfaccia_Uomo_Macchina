@@ -14,9 +14,7 @@ namespace Template.Services.Shared
 
         public Guid PlantId { get; set; }
 
-
         public PlantArticleSections Content { get; set; } = new PlantArticleSections();
-
 
         public PlantCard Card { get; set; } = new PlantCard();
     }

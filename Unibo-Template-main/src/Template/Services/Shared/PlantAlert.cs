@@ -25,11 +25,9 @@ namespace Template.Services.Shared
 
         // Collegamento con la pianta (ogni allerta è legata a una pianta)
         public Guid PlantId { get; set; }
-        public Plant Plant { get; set; }
 
         // Collegamento con Treatment (un'Allerta può essere legata a un trattamento)
         public Guid? TreatmentId { get; set; }
-        public Treatment Treatment { get; set; }
     }
 
     // Enum per il tipo di allerta

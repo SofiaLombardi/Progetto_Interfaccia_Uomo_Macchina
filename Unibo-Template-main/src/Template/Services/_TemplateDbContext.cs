@@ -32,11 +32,25 @@ namespace Template.Services
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Relazione 1 a 1 tra Plant e PlantArticle
-            modelBuilder.Entity<Plant>()
-                .HasOne(p => p.Article)
-                .WithOne(article => article.Plant)
-                .HasForeignKey<PlantArticle>(article => article.PlantId)
+            modelBuilder.Entity<PlantArticle>()
+               .HasOne<Plant>() 
+               .WithOne()
+               .HasForeignKey<PlantArticle>(article => article.PlantId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+            // Relazione tra Alert e Plant (1 a N)
+            modelBuilder.Entity<Alert>()
+                .HasOne<Plant>()
+                .WithMany()
+                .HasForeignKey(a => a.PlantId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Relazione tra Alert e Treatment (1 a 1)
+            modelBuilder.Entity<Alert>()
+                .HasOne<Treatment>()
+                .WithMany()
+                .HasForeignKey(a => a.TreatmentId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // Configura gli Owned Types per PlantArticle
             modelBuilder.Entity<PlantArticle>().OwnsOne(p => p.Content);
@@ -48,15 +62,15 @@ namespace Template.Services
 
             //Relazione 1:N tra Suggestion e Plant
             modelBuilder.Entity<Suggestion>()
-                .HasOne(s => s.Plant)
-                .WithMany(p => p.Suggestions)
+                .HasOne<Plant>()
+                .WithMany()
                 .HasForeignKey(s => s.PlantId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             //Relazione 1:N tra HomeInspiration e Plant
             modelBuilder.Entity<HomeInspiration>()
-                .HasOne(s => s.Plant)
-                .WithMany(p => p.HomeInspirations)
+                .HasOne<Plant>()
+                .WithMany()
                 .HasForeignKey(s => s.PlantId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -66,13 +80,13 @@ namespace Template.Services
             .HasKey(up => new { up.UserId, up.PlantId });
 
             modelBuilder.Entity<UserPlant>()
-                .HasOne(up => up.User)
+                .HasOne<User>()
                 .WithMany(u => u.UserPlants)
                 .HasForeignKey(up => up.UserId);
 
             modelBuilder.Entity<UserPlant>()
-                .HasOne(up => up.Plant)
-                .WithMany(p => p.UserPlants)
+                .HasOne<Plant>()
+                .WithMany()
                 .HasForeignKey(up => up.PlantId);
 
 

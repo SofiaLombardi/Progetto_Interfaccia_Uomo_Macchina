@@ -26,6 +26,5 @@ namespace Template.Services.Shared
         //FK obbligatoria → Ogni HomeInspiration DEVE avere una Pianta associata
         [Required]
         public Guid PlantId { get; set; }
-        public Plant Plant { get; set; }
     }
 }
