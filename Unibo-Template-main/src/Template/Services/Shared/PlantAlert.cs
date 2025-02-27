@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Template.Services.Shared
 {
@@ -14,14 +10,17 @@ namespace Template.Services.Shared
         public Guid Id { get; set; } // ID univoco dell'allerta
 
         [Required]
+        [Display(Name = "Description")]
         public string Description { get; set; } // Descrizione dell'allerta
 
         [Required]
+        [Display(Name ="Alert type")]
         public AlertType Type { get; set; } // Tipo di allerta (es. insetti, malattie)
 
         [Required]
+        [Display(Name ="Alert level")]
         public AlertLevel Level { get; set; }//Grado di allerta(verde, giallo, rosso come il semaforo)
-
+        [Display(Name = "Date issued")]
         public DateTime DateIssued { get; set; } = DateTime.UtcNow; // Data di emissione
 
         // Collegamento con la pianta (ogni allerta è legata a una pianta)

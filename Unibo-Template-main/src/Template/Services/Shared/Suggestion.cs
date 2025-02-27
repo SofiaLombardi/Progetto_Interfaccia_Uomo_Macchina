@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Template.Services.Shared
 {
@@ -18,11 +13,11 @@ namespace Template.Services.Shared
 
         [Required]
         [MaxLength(100)]
-        [DisplayName("Title")]
+        [Display(Name ="Title")]
         public string Title { get; set; }
 
         [Required]
-        [DisplayName("Description")]
+        [Display(Name ="Description")]
         public string Description { get; set; }
 
         //FK obbligatoria → Ogni Suggestion DEVE avere una Pianta associata

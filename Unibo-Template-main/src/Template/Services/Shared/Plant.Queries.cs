@@ -1,10 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Template.Services.Shared.PlantsIndexDTO;
 
 namespace Template.Services.Shared
